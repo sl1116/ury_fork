@@ -1,0 +1,58 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2026-07-06 00:00:00.000000",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "URY Document Category",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2026-07-06 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "URY",
+ "name": "URY Expiring Documents",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT document_code AS `Document Code`, title AS `Title`, category AS `Category`, status AS `Status`, branch AS `Branch`, restaurant AS `Restaurant`, expiry_date AS `Expiry Date`, next_review_date AS `Next Review Date`, document_owner AS `Owner`\nFROM `tabURY Controlled Document`\nWHERE status IN ('Published', 'Approved', 'Expired')\n  AND expiry_date IS NOT NULL\n  AND (%(from_date)s IS NULL OR expiry_date >= %(from_date)s)\n  AND (%(to_date)s IS NULL OR expiry_date <= %(to_date)s)\n  AND (%(branch)s IS NULL OR branch = %(branch)s)\n  AND (%(category)s IS NULL OR category = %(category)s)\nORDER BY expiry_date ASC",
+ "ref_doctype": "URY Controlled Document",
+ "report_name": "URY Expiring Documents",
+ "report_script": "",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "URY Manager"
+  }
+ ]
+}

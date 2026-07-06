@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-06 00:00:00.000000",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "controlled_document",
+  "expiry_date",
+  "reminder_type",
+  "sent_to",
+  "sent_on",
+  "status",
+  "message"
+ ],
+ "fields": [
+  {
+   "fieldname": "controlled_document",
+   "fieldtype": "Link",
+   "label": "Controlled Document",
+   "options": "URY Controlled Document",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry Date",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "reminder_type",
+   "fieldtype": "Select",
+   "label": "Reminder Type",
+   "options": "60 Days\n30 Days\n15 Days\n7 Days\nDue Today\nOverdue\nExpired",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sent_to",
+   "fieldtype": "Small Text",
+   "label": "Sent To"
+  },
+  {
+   "fieldname": "sent_on",
+   "fieldtype": "Datetime",
+   "label": "Sent On",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nSent\nFailed",
+   "default": "Pending",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "message",
+   "fieldtype": "Text",
+   "label": "Message"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-06 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "URY",
+ "name": "URY Document Expiry Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "URY Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1
+  },
+  {
+   "role": "URY Captain",
+   "read": 1,
+   "select": 1,
+   "print": 1,
+   "report": 1
+  },
+  {
+   "role": "URY Cashier",
+   "read": 1,
+   "select": 1,
+   "print": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:DEXP-.#####"
+}

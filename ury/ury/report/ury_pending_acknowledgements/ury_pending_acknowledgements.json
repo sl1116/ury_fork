@@ -1,0 +1,53 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2026-07-06 00:00:00.000000",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "controlled_document",
+   "fieldtype": "Link",
+   "label": "Controlled Document",
+   "options": "URY Controlled Document",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2026-07-06 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "URY",
+ "name": "URY Pending Acknowledgements",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT ack.controlled_document AS `Document`, doc.title AS `Title`, ack.revision_no AS `Revision`, ack.user AS `User`, ack.role AS `Role`, ack.branch AS `Branch`, ack.restaurant AS `Restaurant`, ack.acknowledged_on AS `Acknowledged On`\nFROM `tabURY Document Acknowledgement` ack\nLEFT JOIN `tabURY Controlled Document` doc ON doc.name = ack.controlled_document\nWHERE (%(controlled_document)s IS NULL OR ack.controlled_document = %(controlled_document)s)\n  AND (%(user)s IS NULL OR ack.user = %(user)s)\n  AND (%(branch)s IS NULL OR ack.branch = %(branch)s)\nORDER BY ack.modified DESC",
+ "ref_doctype": "URY Document Acknowledgement",
+ "report_name": "URY Pending Acknowledgements",
+ "report_script": "",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "URY Manager"
+  }
+ ]
+}

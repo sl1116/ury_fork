@@ -113,6 +113,15 @@ before_uninstall = "ury.uninstall.uninstall"
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
+permission_query_conditions = {
+    "URY Controlled Document": "ury.ury.document_control.permissions.get_permission_query_conditions",
+    "URY Document Acknowledgement": "ury.ury.document_control.permissions.get_ack_permission_query_conditions",
+}
+
+has_permission = {
+    "URY Controlled Document": "ury.ury.document_control.permissions.has_permission",
+}
+
 # DocType Class
 # ---------------
 # Override standard doctype classes
@@ -158,27 +167,17 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
-    "cron":{
-		"* * * * *":[
-			"ury.ury.api.ury_kot_validation.kotValidationThread"
-		]
-	}
-# 	"all": [
-# 		"ury.tasks.all"
-# 	],
-# 	"daily": [
-# 		"ury.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"ury.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"ury.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"ury.tasks.monthly"
-# 	],
+    "cron": {
+        "* * * * *": [
+            "ury.ury.api.ury_kot_validation.kotValidationThread"
+        ]
+    },
+    "daily": [
+        "ury.ury.document_control.scheduler.send_document_expiry_reminders",
+        "ury.ury.document_control.scheduler.mark_expired_documents",
+    ],
 }
+
 
 # Testing
 # -------
@@ -379,5 +378,8 @@ fixtures = [
         ],
     },
     {"dt": "Role", "filters": [["role_name", "like", "URY %"]]},
+    {"dt": "Workflow", "filters": [["name", "like", "URY Document%"]]},
+    {"dt": "Workflow State", "filters": [["name", "in", ["Draft", "Under Review", "Pending Approval", "Approved", "Published", "Revision Required", "Expired", "Superseded", "Archived", "Cancelled"]]]},
+    {"dt": "Notification", "filters": [["name", "like", "URY Document%"]]},
     "Client Script",
 ]
